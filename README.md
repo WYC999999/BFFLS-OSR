@@ -1,8 +1,8 @@
 
 <img width="300" height="300" alt="北京市丰台区外国语学校校徽" src="https://github.com/user-attachments/assets/721a8d88-4492-4de5-91a4-1a7e2050e714" />
 
-# 🏫 北京市丰台区外国语学校开源项目  
-**Beijing Fengtai Foreign Language School Open Source Project (BFFLS-OSP)**
+# 🏫 北京市丰台区外国语学校开源项目仓库  
+**Beijing Fengtai Foreign Language School Open Source Repository (BFFLS-OSR)**
 
 ---
 
