@@ -2,7 +2,7 @@
 
 英文名：Open Tie-Break Protocol
 
-缩写：OTBP
+英文名缩写：OTBP
 
 代码:
 ```python
