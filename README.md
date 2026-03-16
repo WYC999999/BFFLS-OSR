@@ -1,4 +1,40 @@
-# 姓名：张耀辉
-> [!NOTE]
-> 他就是代码仙人
-## 别名：代码仙人
+中文名：开源平票裁决协议
+
+英文名：Open Tie-Break Protocol
+
+缩写：OTBP
+
+代码:
+```python
+import hashlib
+
+def final_decision(votes):
+    """
+    votes: 投票列表，例如 ["yes", "no", "yes", "no"]
+    返回最终结果
+    """
+
+    yes = votes.count("yes")
+    no = votes.count("no")
+
+    # 非平票直接返回
+    if yes > no:
+        return "同意"
+    if no > yes:
+        return "否决"
+
+    # 平票 → 使用哈希算法生成最终票
+    vote_string = "".join(votes)
+    hash_value = hashlib.sha256(vote_string.encode()).hexdigest()
+
+    # 奇偶决定结果
+    if int(hash_value, 16) % 2 == 0:
+        return "同意"
+    else:
+        return "否决"
+
+
+# 示例
+votes = ["yes", "no", "yes", "no"]
+print(final_decision(votes))
+```
