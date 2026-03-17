@@ -1,4 +1,4 @@
-# BFFLS-OSR 分支：校园异常物品登记档案  
+# 校园异常物品登记档案  
 **Campus Anomalous Objects Registry (CAOR)**
 
 本分支专注于系统性收录、登记与归档在学校（校园）环境中确认存在的异常/奇异物品。
