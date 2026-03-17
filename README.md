@@ -1,3 +1,6 @@
+> [!NOTE]
+> 已被废弃
+> 
 中文名：开源平票裁决协议
 
 英文名：Open Tie-Break Protocol
