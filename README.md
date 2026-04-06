@@ -1,5 +1,6 @@
 
-<img width="170" height="170" alt="北京市丰台区外国语学校校徽" src="https://github.com/user-attachments/assets/721a8d88-4492-4de5-91a4-1a7e2050e714" /> <img width="160" height="160" alt="1769236899567" src="https://github.com/user-attachments/assets/13e4cc67-ea32-40d4-8d30-baddc5aaf90e" />
+<img width="170" height="170" alt="北京市丰台区外国语学校校徽" src="https://github.com/user-attachments/assets/721a8d88-4492-4de5-91a4-1a7e2050e714" /> <img width="170" height="170" alt="dc473f25a098266afd0a44263bed8a5a" src="https://github.com/user-attachments/assets/1c5a6550-49a0-48ff-a7a8-73e89cad0647" />
+<img width="170" height="170" alt="1769236899567" src="https://github.com/user-attachments/assets/13e4cc67-ea32-40d4-8d30-baddc5aaf90e" />
 
 ![1769595293558](https://github.com/user-attachments/assets/4effe8a6-e8a0-4379-9990-ea837e5f8f13)
 ![x com_1362758201](https://github.com/user-attachments/assets/601ed080-b8df-40b4-894d-9f491bca2bbe)
