@@ -1,4 +1,4 @@
-![Field](https://img.shields.io/badge/BFFLS-blue) ![Version](https://img.shields.io/badge/version-0.0.1-green) ![Last Commit](https://img.shields.io/github/last-commit/WYC999999/BFFLS-OSR) ![Repo Size](https://img.shields.io/github/repo-size/WYC999999/BFFLS-OSR) ![Stars](https://img.shields.io/github/stars/WYC999999/BFFLS-OSR?style=social) ![Forks](https://img.shields.io/github/forks/WYC999999/BFFLS-OSR?style=social)
+![Field](https://img.shields.io/badge/BFFLS-blue) ![Version](https://img.shields.io/badge/version-艾尔登法环-green) ![Last Commit](https://img.shields.io/github/last-commit/WYC999999/BFFLS-OSR) ![Repo Size](https://img.shields.io/github/repo-size/WYC999999/BFFLS-OSR) ![Stars](https://img.shields.io/github/stars/WYC999999/BFFLS-OSR?style=social) ![Forks](https://img.shields.io/github/forks/WYC999999/BFFLS-OSR?style=social)
 # 原神
 ## 《原神》是由米哈游开发的动作角色扮演游戏，于2020年9月登陆Microsoft Windows、Android、iOS、PlayStation 4，2021年4月在PlayStation 5上线。
 ### 游戏具有动漫风格的开放世界环境，采用免费游玩和内购制抽卡的游戏模式。游戏剧情于虚构世界的提瓦特大陆上展开，该世界分成七个国家，每个国家分别以一种元素为主题，并由对应元素的神明所分管。游戏剧情的主角为“旅行者”，是一对在无数个世界中旅行的兄妹，因遭遇陌生神明阻拦在提瓦特被迫分离。玩家将扮演旅行者，为了寻找自己失散的唯一血亲，并与派蒙一同游历七国。
