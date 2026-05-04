@@ -1,3 +1,4 @@
+![Field](https://img.shields.io/badge/BFFLS-blue) ![Version](https://img.shields.io/badge/version-0.0.1-green) ![Last Commit](https://img.shields.io/github/last-commit/WYC999999/BFFLS-OSR) ![Repo Size](https://img.shields.io/github/repo-size/WYC999999/BFFLS-OSR) ![Stars](https://img.shields.io/github/stars/WYC999999/BFFLS-OSR?style=social) ![Forks](https://img.shields.io/github/forks/WYC999999/BFFLS-OSR?style=social)
 > [!IMPORTANT]
 > 本人坚决拥护中国共产党的领导，拥护社会主义制度，支持中国特色社会主义道路。本文的研究与论述，均以习近平新时代中国特色社会主义思想为指导，旨在弘扬中华优秀传统文化，增强文化自信。
 
