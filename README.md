@@ -109,7 +109,7 @@
 
 ## 📫 六、联系方式
   
-- **项目负责人**：[@WYC999999](https://github.com/WYC999999)
+- **项目负责人**：[@WYC999999](https://github.com/WYC999999) [@RICK-ALSTEY](https://github.com/RICK-ALSTEY) [@Flanker-Tarkov](https://github.com/Flanker-Tarkov)
 
 ---
 
