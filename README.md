@@ -1,6 +1,6 @@
 # BW指数: 人类七情六欲量化建模与分析系统
 
-![Field](https://img.shields.io/badge/BFFLS-orange) ![Version](https://img.shields.io/badge/version-0.0.1-green)
+![Field](https://img.shields.io/badge/BFFLS-blue) ![Version](https://img.shields.io/badge/version-0.0.1-green) ![Last Commit](https://img.shields.io/github/last-commit/WYC999999/BFFLS-OSR) ![Repo Size](https://img.shields.io/github/repo-size/WYC999999/BFFLS-OSR) ![Stars](https://img.shields.io/github/stars/WYC999999/BFFLS-OSR?style=social) ![Forks](https://img.shields.io/github/forks/WYC999999/BFFLS-OSR?style=social)
 
 ## 1. 简介 (Introduction)
 
