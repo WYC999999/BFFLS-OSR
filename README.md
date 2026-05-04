@@ -1,3 +1,4 @@
+![Field](https://img.shields.io/badge/BFFLS-blue) ![Version](https://img.shields.io/badge/version-0.0.1-green) ![Last Commit](https://img.shields.io/github/last-commit/WYC999999/BFFLS-OSR) ![Repo Size](https://img.shields.io/github/repo-size/WYC999999/BFFLS-OSR) ![Stars](https://img.shields.io/github/stars/WYC999999/BFFLS-OSR?style=social) ![Forks](https://img.shields.io/github/forks/WYC999999/BFFLS-OSR?style=social)
 # 哲学专项研究：关于平浩恩个体评价偏移的历史唯物主义与辩证法深度分析
 
 **课题名称**：个体意识对客体价值判定的动态演变——以平浩恩对和合谷宫保鸡丁的两次评价为样本
