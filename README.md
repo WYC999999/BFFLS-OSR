@@ -1,3 +1,4 @@
+![Field](https://img.shields.io/badge/BFFLS-blue) ![Version](https://img.shields.io/badge/version-使命召唤手游-green) ![Last Commit](https://img.shields.io/github/last-commit/WYC999999/BFFLS-OSR) ![Repo Size](https://img.shields.io/github/repo-size/WYC999999/BFFLS-OSR) ![Stars](https://img.shields.io/github/stars/WYC999999/BFFLS-OSR?style=social) ![Forks](https://img.shields.io/github/forks/WYC999999/BFFLS-OSR?style=social)
 # 宫保鸡丁品质鉴评委员会
 ## 宫保鸡丁品质鉴评委员会会徽
 <img width="2048" height="2048" alt="宫保鸡丁品质鉴评委员会" src="https://github.com/user-attachments/assets/6e288fb3-77b6-4acd-861b-7915f6c9848c" />
