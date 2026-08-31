@@ -60,56 +60,179 @@ MAX_COPY_BYTES = 8 * 1024 * 1024
 MAX_PAGES_PER_BRANCH = 4000
 
 SITE_CSS = """
-:root { --bg:#f7f8fa; --card:#fff; --text:#22262e; --muted:#6b7280; --border:#e5e7eb;
-  --accent:#3b82f6; --accent-dark:#2563eb; --radius:10px;
-  --shadow:0 1px 3px rgba(16,24,40,.08); }
+/* ===== Arknights-inspired Dark Theme (default) + Light Mode Toggle ===== */
+:root {
+  --bg:#0c1017; --bg-deep:#080b10;
+  --surface:#151c25; --surface-hov:#1a2332;
+  --text:#e0e6ed; --text-dim:#8b99ab; --muted:#5d6d82;
+  --border:#252f3d; --border-light:#1e2736;
+  --accent:#4fc3f7; --accent-glow:rgba(79,195,247,.15);
+  --accent-warm:#f0a030; --accent-warm-glow:rgba(240,160,48,.12);
+  --radius:10px; --radius-sm:6px;
+  --shadow:0 2px 12px rgba(0,0,0,.35), 0 0 0 1px var(--border);
+  --shadow-hover:0 8px 28px rgba(0,0,0,.45), 0 0 20px var(--accent-glow);
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+}
+html.light {
+  --bg:#f4f6fa; --bg-deep:#eef1f6;
+  --surface:#ffffff; --surface-hov:#f8fafc;
+  --text:#1a2030; --text-dim:#4a5568; --muted:#8896a8;
+  --border:#dde3ec; --border-light:#e2e8f2;
+  --accent:#2563eb; --accent-glow:rgba(37,99,235,.08);
+  --accent-warm:#ea580c; --accent-warm-glow:rgba(234,88,12,.08);
+  --shadow:0 1px 4px rgba(16,24,40,.08), 0 0 0 1px var(--border);
+  --shadow-hover:0 6px 20px rgba(16,24,40,.12), 0 0 16px var(--accent-glow);
+}
+
 * { box-sizing:border-box; margin:0; padding:0; }
-body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-  background:var(--bg); color:var(--text); line-height:1.7; padding-bottom:60px; }
-.topbar { position:sticky; top:0; z-index:9; background:rgba(255,255,255,.9); backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--border); padding:10px 20px; display:flex; align-items:center; gap:12px; }
-.topbar a { color:var(--accent); text-decoration:none; font-size:14px; white-space:nowrap; }
-.topbar .crumb { font-size:14px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.topbar .gh { margin-left:auto; }
-.wrap { max-width:920px; margin:24px auto; padding:0 20px; }
-h1 { font-size:26px; margin-bottom:6px; }
-.sub { color:var(--muted); font-size:14px; margin-bottom:20px; }
-.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
-.card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-  box-shadow:var(--shadow); padding:18px; display:block; color:inherit; text-decoration:none;
-  transition:transform .15s, box-shadow .15s; }
-.card:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(16,24,40,.12); }
-.card h3 { font-size:16px; color:var(--accent-dark); margin-bottom:6px; word-break:break-all; }
-.card p { font-size:13px; color:var(--muted); margin:0; }
-table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--border);
-  border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
-th, td { text-align:left; padding:9px 14px; border-bottom:1px solid var(--border); font-size:14px; }
-th { background:#f9fafb; color:var(--muted); font-weight:600; }
+
+body {
+  font-family:var(--font-sans); background:var(--bg); color:var(--text);
+  line-height:1.72; padding-bottom:60px; transition:background .3s,color .3s;
+}
+
+/* ===== Top bar ===== */
+.topbar {
+  position:sticky; top:0; z-index:99;
+  background:rgba(12,16,23,.85); backdrop-filter:saturate(180%) blur(16px);
+  -webkit-backdrop-filter:saturate(180%) blur(16px);
+  border-bottom:1px solid var(--border); padding:10px 24px;
+  display:flex; align-items:center; gap:14px;
+  transition:background .3s,border-color .3s;
+}
+html.light .topbar { background:rgba(244,246,250,.88); }
+
+.topbar a { color:var(--accent); text-decoration:none; font-size:13.5px; white-space:nowrap;
+  transition:color .15s; }
+.topbar a:hover { color:var(--accent-warm); }
+.topbar .crumb { font-size:13.5px; color:var(--muted); overflow:hidden;
+  text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0; }
+.topbar .gh { margin-left:auto; white-space:nowrap; }
+
+.theme-toggle {
+  background:none; border:1.5px solid var(--border); border-radius:50%;
+  width:34px; height:34px; cursor:pointer; display:flex; align-items:center;
+  justify-content:center; color:var(--text-dim); font-size:17px;
+  transition:all .25s; flex-shrink:0;
+}
+.theme-toggle:hover { border-color:var(--accent); color:var(--accent);
+  box-shadow:0 0 12px var(--accent-glow); }
+
+.search-wrap { position:relative; max-width:420px; width:100%; }
+.search-wrap input {
+  width:100%; padding:9px 14px 9px 36px; border:1.5px solid var(--border);
+  border-radius:var(--radius-sm); background:var(--surface); color:var(--text);
+  font-size:13.5px; font-family:var(--font-sans); outline:none;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+}
+.search-wrap input:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow); }
+.search-wrap input::placeholder { color:var(--muted); }
+.search-wrap .si { position:absolute; left:11px; top:50%;
+  transform:translateY(-50%); color:var(--muted); pointer-events:none; font-size:14px; }
+
+.wrap { max-width:960px; margin:28px auto; padding:0 24px; }
+h1 { font-size:27px; letter-spacing:-.02em; margin-bottom:6px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-warm));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.sub { color:var(--muted); font-size:14px; margin-bottom:24px; }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+.card {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  box-shadow:var(--shadow); padding:20px; display:block; color:inherit; text-decoration:none;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+  position:relative; overflow:hidden;
+}
+.card::before {
+  content:''; position:absolute; top:0;left:0;right:0;height:2.5px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-warm)); opacity:0;
+  transition:opacity .25s;
+}
+.card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); border-color:var(--accent); }
+.card:hover::before { opacity:1; }
+.card .c-icon { font-size:26px; margin-bottom:8px; display:block; }
+.card h3 { font-size:15.5px; color:var(--text); margin-bottom:6px; word-break:break-all;
+  transition:color .15s; }
+.card:hover h3 { color:var(--accent); }
+.card p { font-size:12.5px; color:var(--muted); margin:0; line-height:1.55; }
+.card .tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+.card .tag-pill {
+  display:inline-block; font-size:11px; padding:2px 8px; border-radius:99px;
+  background:var(--accent-glow); color:var(--accent); border:1px solid transparent;
+  font-weight:500; letter-spacing:.02em;
+}
+html.light .card .tag-pill { background:rgba(37,99,235,.08); color:var(--accent); }
+
+table { width:100%; border-collapse:collapse; background:var(--surface);
+  border:1px solid var(--border); border-radius:var(--radius); overflow:hidden;
+  box-shadow:var(--shadow); }
+th,td { text-align:left; padding:10px 16px; border-bottom:1px solid var(--border-light); font-size:13.5px; }
+th { background:var(--bg-deep); color:var(--text-dim); font-weight:600;
+  text-transform:uppercase; font-size:11.5px; letter-spacing:.05em; }
 tr:last-child td { border-bottom:none; }
-td a { color:var(--accent); text-decoration:none; word-break:break-all; }
-td a:hover { color:var(--accent-dark); text-decoration:underline; }
+tr:hover td { background:var(--surface-hov); }
+td a { color:var(--accent); text-decoration:none; word-break:break-all; transition:color .15s; }
+td a:hover { color:var(--accent-warm); text-decoration:underline; }
 .tag { display:inline-block; font-size:12px; color:var(--muted); }
-pre { background:#161b22; color:#e6edf3; padding:16px; border-radius:8px; overflow-x:auto;
-  font-size:13.5px; line-height:1.6; }
-code { font-family:"SFMono-Regular",Consolas,Menlo,monospace; }
-p code, li code, td code { background:#f0f2f5; color:#c7254e; padding:1px 5px; border-radius:4px; font-size:.9em; }
-.md-body { background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-  box-shadow:var(--shadow); padding:24px 28px; margin-bottom:18px; }
-.md-body h1,.md-body h2 { border-bottom:1px solid var(--border); padding-bottom:6px; margin:18px 0 10px; }
-.md-body h1 { font-size:22px; } .md-body h2 { font-size:19px; }
-.md-body img { max-width:100%; }
-.filehead { background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-  box-shadow:var(--shadow); padding:12px 18px; margin-bottom:14px; font-size:13px; color:var(--muted);
-  display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
-.filehead a { color:var(--accent); text-decoration:none; }
-.note { color:var(--muted); font-size:13px; margin-top:14px; }
-.footer { text-align:center; color:var(--muted); font-size:12.5px; margin-top:36px; }
-.dir { font-weight:600; }
+.dir { font-weight:600; color:var(--accent) !important; }
+
+pre {
+  background:var(--bg-deep); color:#c9d1d9; padding:18px 20px; border-radius:var(--radius);
+  overflow-x:auto; font-size:13.2px; line-height:1.65;
+  border:1px solid var(--border); position:relative;
+}
+code { font-family:var(--font-mono); }
+p code,li code,td code {
+  background:var(--surface-hov); color:#f0a030; padding:2px 6px;
+  border-radius:4px; font-size:.88em; font-family:var(--font-mono);
+}
+html.light p code,html.light li code,html.light td code { color:#cf4a00; }
+
+.md-body {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  box-shadow:var(--shadow); padding:26px 32px; margin-bottom:20px;
+  transition:background .3s,border-color .3s;
+}
+.md-body h1,.md-body h2 { border-bottom:1px solid var(--border-light); padding-bottom:8px;
+  margin:22px 0 12px; }
+.md-body h1 { font-size:22px; } .md-body h2 { font-size:18.5px; }
+.md-body h3 { font-size:16px; margin:16px 0 8px; }
+.md-body img { max-width:100%; border-radius:var(--radius-sm); }
+.md-body ul,.md-body ol { padding-left:22px; margin:10px 0; }
+.md-body li { margin:4px 0; }
+.md-body blockquote { border-left:3px solid var(--accent); padding:10px 18px;
+  margin:14px 0; background:var(--accent-glow); border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  color:var(--text-dim); }
+.md-body table { margin:14px 0; }
+.md-body a { color:var(--accent); } .md-body a:hover { color:var(--accent-warm); }
+
+.filehead {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  box-shadow:var(--shadow); padding:12px 20px; margin-bottom:16px; font-size:13px;
+  color:var(--muted); display:flex; gap:14px; flex-wrap:wrap; align-items:center;
+}
+.filehead b { color:var(--text); }
+.filehead a { color:var(--accent); text-decoration:none; transition:color .15s; }
+.filehead a:hover { color:var(--accent-warm); }
+
+.note { color:var(--muted); font-size:13px; margin-top:16px; }
+.footer { text-align:center; color:var(--muted); font-size:12px; margin-top:44px;
+  padding-top:20px; border-top:1px solid var(--border-light); }
+.no-results { text-align:center; color:var(--muted); padding:32px 0; font-size:14px; }
+
+@media(max-width:720px) {
+  .topbar { padding:8px 14px; gap:10px; flex-wrap:wrap; }
+  .wrap { padding:0 16px; margin:20px auto; }
+  .grid { grid-template-columns:1fr; }
+  h1 { font-size:22px; }
+  .search-wrap { max-width:100%; }
+}
 """
 
-HLJS = ('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">\n'
+HLJS = ('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">\n'
         '<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>\n'
-        '<script>window.addEventListener("load",function(){try{hljs.highlightAll()}catch(e){}});</script>')
+        '<script>document.addEventListener("DOMContentLoaded",function(){try{hljs.highlightAll()}catch(e){}})</script>')
 
 ES = html.escape
 
@@ -127,15 +250,96 @@ def q(s: str) -> str:
     return urllib.parse.quote(s, safe="/")
 
 
-def wrap_page(title: str, body: str, depth: int, extra_head: str = "") -> str:
+def branch_meta(name: str) -> tuple:
+    """根据分支名返回 (icon_emoji, [tag_labels])"""
+    n = name.lower()
+    icon = "U0001f3e0"  # 🏠 默认
+    tags = []
+    if any(k in n for k in ("main", "master", "trunk")):
+        icon = "U0001f3e0"; tags.append("主分支")
+    elif any(k in n for k in ("dev", "develop", "development")):
+        icon = "U0001f527"; tags.append("开发")
+    elif "feature" in n or "feat" in n:
+        icon = "✨"; tags.append("功能")
+    elif any(k in n for k in ("fix", "bug", "hotfix", "patch")):
+        icon = "U0001f6a7"; tags.append("修复")
+    elif "release" in n or "rc" in n or "v" in n:
+        icon = "U0001f389"; tags.append("发布")
+    elif "doc" in n or "wiki" in n:
+        icon = "U0001f4d6"; tags.append("文档")
+    elif "test" in n or "ci" in n:
+        icon = "U0001f680"; tags.append("测试")
+    if "osr" in n: tags.append("OSR")
+    if "bffls" in n: tags.append("BFFLS")
+    return icon, tags
+
+
+def branch_meta(name: str) -> tuple:
+    """根据分支名返回 (icon_emoji, [tag_labels])"""
+    n = name.lower()
+    icon = "U0001f3e0"  # 🏠 默认
+    tags = []
+    if any(k in n for k in ("main", "master", "trunk")):
+        icon = "U0001f3e0"; tags.append("主分支")
+    elif any(k in n for k in ("dev", "develop", "development")):
+        icon = "U0001f527"; tags.append("开发")
+    elif "feature" in n or "feat" in n:
+        icon = "✨"; tags.append("功能")
+    elif any(k in n for k in ("fix", "bug", "hotfix", "patch")):
+        icon = "U0001f6a7"; tags.append("修复")
+    elif "release" in n or "rc" in n or "v" in n:
+        icon = "U0001f389"; tags.append("发布")
+    elif "doc" in n or "wiki" in n:
+        icon = "U0001f4d6"; tags.append("文档")
+    elif "test" in n or "ci" in n:
+        icon = "U0001f680"; tags.append("测试")
+    # 根据名称中的关键词追加额外标签
+    if "osr" in n: tags.append("OSR")
+    if "bffls" in n: tags.append("BFFLS")
+    return icon, tags
+
+
+def wrap_page(title: str, body: str, depth: int, extra_head: str = "",
+             search_id: str = "", is_overview: bool = False) -> str:
     pre = "../" * depth
+    # 搜索栏 HTML
+    sh = ""
+    if search_id:
+        sh = ('<div class="search-wrap" style="margin-bottom:20px">'
+              '<span class="si">&#128269;</span>'
+              '<input type="search" id="%s" placeholder="搜索%s…" '
+              'data-target="%s" autocomplete="off"></div>\n'
+              % (ES(search_id),
+                 "分支" if is_overview else "文件",
+                 ".card" if is_overview else "table tr"))
+    # 切换按钮
+    tb = ('<button class="theme-toggle" id="tbtn" title="切换主题" aria-label="切换亮/暗模式">'
+          '&#9790;</button>')
+    # 内联 JS
+    js = ('<script>'
+          '(function(){var b=document.documentElement,t=document.getElementById("tbtn");'
+          'if(t)t.addEventListener("click",function(){b.classList.toggle("light")});'
+          'var si=document.getElementById("%s");if(si){'
+          'var tgt=si.getAttribute("data-target");'
+          'var tm;si.addEventListener("input",function(){clearTimeout(tm);tm=setTimeout(function(){'
+          'var q=si.value.trim().toLowerCase();var els=document.querySelectorAll(tgt);'
+          'var vis=0;els.forEach(function(el){var t=(el.textContent||el.innerText||"").toLowerCase();'
+          'var show=q===""||t.indexOf(q)!==-1;el.style.display=show?"":"none";if(show)vis++});'
+          'var nr=document.getElementById("nores");if(nr)nr.style.display=q!==""&&vis===0?"":"none"'
+          '},120)});}'
+          '})();</script>' % ES(search_id))
     return ("<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n<meta charset=\"UTF-8\">\n"
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
             "<title>%s</title>\n<style>%s</style>\n%s\n</head>\n<body>\n"
             '<div class="topbar"><a href="%sindex.html">&larr; 分支总览</a>'
-            '<span class="crumb">%s</span></div>\n'
-            '<div class="wrap">\n%s\n</div>\n</body>\n</html>\n'
-            % (ES(title), SITE_CSS, extra_head, pre, ES(title), body))
+            '%s<span class="crumb">%s</span>%s</div>\n'
+            '<div class="wrap">%s%s<div class="no-results" id="nores" style="display:none">'
+            '没有匹配的结果</div></div>\n%s\n</body>\n</html>\n'
+            % (ES(title), SITE_CSS, extra_head, pre,
+               sh if not is_overview else "",
+               tb, ES(title),
+               sh if is_overview else "",
+               body, js))
 
 
 # ---------- git 调用(全部经临时文件, 兼容受限环境) ----------
@@ -230,24 +434,31 @@ def listing_page(branch: str, dir_rel: str, entries: list, readme_html: str,
             % (ES(dir_rel or branch), ES(branch), (" · " + gh_link) if gh else "",
                ('<div class="md-body">%s</div>' % readme_html) if readme_html else "",
                "".join(rows)))
-    return wrap_page("%s / %s" % (branch, dir_rel or ""), body, depth)
+    return wrap_page("%s / %s" % (branch, dir_rel or ""), body, depth,
+                    search_id="file-search")
 
 
 def overview_page(title: str, repo_url: str, infos: list) -> str:
     cards = []
     for it in infos:
+        icon, tags = branch_meta(it["name"])
+        tag_html = ""
+        if tags:
+            tag_html = '<div class="tags">' + "".join(
+                '<span class="tag-pill">%s</span>' % ES(t) for t in tags) + '</div>'
         extra = " · 自带首页" if it["has_index"] else ""
-        cards.append('<a class="card" href="%s"><h3>%s</h3>'
-                     '<p>📅 %s · 📄 %d 个文件%s</p></a>'
-                     % (ES(it["href"]), ES(it["name"]), ES(it["date"] or "—"),
-                        it["files"], extra))
+        cards.append('<a class="card" href="%s"><span class="c-icon">%s</span><h3>%s</h3>'
+                     '<p>📅 %s · 📄 %d 个文件%s</p>%s</a>'
+                     % (ES(it["href"]), icon, ES(it["name"]),
+                        ES(it["date"] or "—"), it["files"], extra, tag_html))
     gh_link = '<a class="gh" href="%s">GitHub 仓库</a>' % ES(repo_url) if repo_url else ""
-    body = ('<h1>%s</h1><p class="sub">全部分支一览 · 共 %d 个分支 · 生成于 %s (UTC)%s</p>'
+    body = ('<h1>%s</h1><p class="sub">全部分支一览 · 共 %d 个分支 · 生成于 %s (UTC)</p>'
             '<div class="grid">%s</div>'
-            '<p class="footer">本站由 GitHub Actions 自动构建：分支更新后自动重建。</p>'
-            % (ES(title), len(infos), datetime.utcnow().strftime("%Y-%m-%d %H:%M"), gh_link,
-               "".join(cards)))
-    return wrap_page(title + " · 分支总览", body, 0)
+            '<p class="footer">本站由 GitHub Actions 自动构建：分支更新后自动重建。%s</p>'
+            % (ES(title), len(infos), datetime.utcnow().strftime("%Y-%m-%d %H:%M"),
+               "".join(cards), gh_link))
+    return wrap_page(title + " · 分支总览", body, 0,
+                    search_id="branch-search", is_overview=True)
 
 
 # ---------- 单个分支构建 ----------
