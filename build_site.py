@@ -60,177 +60,301 @@ MAX_COPY_BYTES = 8 * 1024 * 1024
 MAX_PAGES_PER_BRANCH = 4000
 
 SITE_CSS = """
-/* ===== Arknights-inspired Dark Theme (default) + Light Mode Toggle ===== */
+/* ================================================================
+   BFFLS-OSR — ak.hypergryph.com inspired design
+   Deep dark + glassmorphism + cyan/gold glow + geometric accents
+   ================================================================ */
 :root {
-  --bg:#0c1017; --bg-deep:#080b10;
-  --surface:#151c25; --surface-hov:#1a2332;
-  --text:#e0e6ed; --text-dim:#8b99ab; --muted:#5d6d82;
-  --border:#252f3d; --border-light:#1e2736;
-  --accent:#4fc3f7; --accent-glow:rgba(79,195,247,.15);
-  --accent-warm:#f0a030; --accent-warm-glow:rgba(240,160,48,.12);
-  --radius:10px; --radius-sm:6px;
-  --shadow:0 2px 12px rgba(0,0,0,.35), 0 0 0 1px var(--border);
-  --shadow-hover:0 8px 28px rgba(0,0,0,.45), 0 0 20px var(--accent-glow);
-  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
-  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  --bg:#06080d; --bg-deep:#030408;
+  --surface:rgba(16,22,36,.55); --surface-solid:#101624; --surface-hov:rgba(22,30,48,.65);
+  --text:#e8ecf4; --text-dim:#8b9bb8; --muted:#546380;
+  --border:rgba(70,90,130,.25); --border-light:rgba(70,90,130,.15);
+  --accent:#00e5ff; --accent-alt:#4fd1c5;
+  --accent-glow:rgba(0,229,255,.12); --accent-glow-strong:rgba(0,229,255,.25);
+  --gold:#ffc850; --gold-glow:rgba(255,200,80,.12);
+  --purple:#a78bfa; --purple-glow:rgba(167,139,250,.1);
+  --radius:12px; --radius-sm:8px; --radius-lg:20px;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
+    "Microsoft YaHei","Noto Sans SC","Helvetica Neue",Arial,sans-serif;
+  --font-mono:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  --glow:0 0 20px var(--accent-glow), 0 0 60px rgba(0,229,255,.04);
+  --glow-strong:0 0 24px var(--accent-glow-strong), 0 0 80px rgba(0,229,255,.06);
+  --glass:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+  --transition:.3s cubic-bezier(.4,0,.2,1);
 }
 html.light {
-  --bg:#f4f6fa; --bg-deep:#eef1f6;
-  --surface:#ffffff; --surface-hov:#f8fafc;
-  --text:#1a2030; --text-dim:#4a5568; --muted:#8896a8;
-  --border:#dde3ec; --border-light:#e2e8f2;
-  --accent:#2563eb; --accent-glow:rgba(37,99,235,.08);
-  --accent-warm:#ea580c; --accent-warm-glow:rgba(234,88,12,.08);
-  --shadow:0 1px 4px rgba(16,24,40,.08), 0 0 0 1px var(--border);
-  --shadow-hover:0 6px 20px rgba(16,24,40,.12), 0 0 16px var(--accent-glow);
+  --bg:#f0f2f7; --bg-deep:#e4e8f2;
+  --surface:rgba(255,255,255,.82); --surface-solid:#fff; --surface-hov:rgba(245,248,255,.95);
+  --text:#141c32; --text-dim:#4e5d7a; --muted:#8896ad;
+  --border:rgba(100,120,160,.18); --border-light:rgba(100,120,160,.1);
+  --accent:#0066cc; --accent-alt:#0891b2;
+  --accent-glow:rgba(0,102,204,.07); --accent-glow-strong:rgba(0,102,204,.14);
+  --gold:#cc7700; --gold-glow:rgba(204,119,0,.08);
+  --purple:#7c3aed; --purple-glow:rgba(124,58,237,.06);
+  --glow:0 1px 8px rgba(0,0,0,.06), 0 0 0 1px var(--border);
+  --glow-strong:0 4px 16px rgba(0,0,0,.08), 0 0 0 1px var(--border);
+  --glass:linear-gradient(135deg,rgba(255,255,255,.7),rgba(255,255,255,.4));
 }
 
-* { box-sizing:border-box; margin:0; padding:0; }
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 
 body {
-  font-family:var(--font-sans); background:var(--bg); color:var(--text);
-  line-height:1.72; padding-bottom:60px; transition:background .3s,color .3s;
+  font-family:var(--font-sans); background:var(--bg);
+  color:var(--text); line-height:1.75; min-height:100vh;
+  transition:background var(--transition), color var(--transition);
+  /* subtle bg pattern */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,229,255,.05), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(167,139,250,.04), transparent),
+    radial-gradient(ellipse 50% 30% at 0% 100%, rgba(255,200,80,.03), transparent);
+  background-attachment:fixed;
+}
+html.light body {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,102,204,.03), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(124,58,237,.03), transparent);
 }
 
-/* ===== Top bar ===== */
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+::-webkit-scrollbar-thumb:hover { background:var(--muted); }
+
+/* ===== Top navigation bar ===== */
 .topbar {
-  position:sticky; top:0; z-index:99;
-  background:rgba(12,16,23,.85); backdrop-filter:saturate(180%) blur(16px);
-  -webkit-backdrop-filter:saturate(180%) blur(16px);
-  border-bottom:1px solid var(--border); padding:10px 24px;
-  display:flex; align-items:center; gap:14px;
-  transition:background .3s,border-color .3s;
+  position:sticky; top:0; z-index:999;
+  background:rgba(6,8,13,.75); backdrop-filter:saturate(200%) blur(20px);
+  -webkit-backdrop-filter:saturate(200%) blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 28px; height:56px;
+  display:flex; align-items:center; gap:16px;
+  transition:all var(--transition);
 }
-html.light .topbar { background:rgba(244,246,250,.88); }
+html.light .topbar { background:rgba(240,242,247,.8); }
 
-.topbar a { color:var(--accent); text-decoration:none; font-size:13.5px; white-space:nowrap;
-  transition:color .15s; }
-.topbar a:hover { color:var(--accent-warm); }
-.topbar .crumb { font-size:13.5px; color:var(--muted); overflow:hidden;
-  text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0; }
+.topbar a {
+  color:var(--accent); text-decoration:none; font-size:13px;
+  white-space:nowrap; font-weight:500; letter-spacing:.01em;
+  transition:color .2s, text-shadow .2s;
+}
+.topbar a:hover { color:var(--gold); text-shadow:0 0 12px var(--gold-glow); }
+.topbar .crumb {
+  font-size:13px; color:var(--muted); overflow:hidden;
+  text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0;
+}
 .topbar .gh { margin-left:auto; white-space:nowrap; }
 
+/* Theme toggle */
 .theme-toggle {
-  background:none; border:1.5px solid var(--border); border-radius:50%;
+  background:var(--glass); border:1px solid var(--border); border-radius:50%;
   width:34px; height:34px; cursor:pointer; display:flex; align-items:center;
-  justify-content:center; color:var(--text-dim); font-size:17px;
-  transition:all .25s; flex-shrink:0;
+  justify-content:center; color:var(--text-dim); font-size:16px;
+  transition:all var(--transition); flex-shrink:0;
 }
-.theme-toggle:hover { border-color:var(--accent); color:var(--accent);
-  box-shadow:0 0 12px var(--accent-glow); }
+.theme-toggle:hover {
+  border-color:var(--accent); color:var(--accent);
+  box-shadow:var(--glow); transform:rotate(15deg);
+}
 
-.search-wrap { position:relative; max-width:420px; width:100%; }
+/* Search */
+.search-wrap { position:relative; max-width:400px; width:100%; }
 .search-wrap input {
-  width:100%; padding:9px 14px 9px 36px; border:1.5px solid var(--border);
-  border-radius:var(--radius-sm); background:var(--surface); color:var(--text);
-  font-size:13.5px; font-family:var(--font-sans); outline:none;
-  transition:border-color .2s,box-shadow .2s,background .2s;
+  width:100%; padding:9px 14px 9px 36px;
+  border:1px solid var(--border); border-radius:99px;
+  background:var(--surface); color:var(--text);
+  font-size:13px; font-family:var(--font-sans); outline:none;
+  transition:all .25s;
 }
-.search-wrap input:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow); }
-.search-wrap input::placeholder { color:var(--muted); }
-.search-wrap .si { position:absolute; left:11px; top:50%;
-  transform:translateY(-50%); color:var(--muted); pointer-events:none; font-size:14px; }
+.search-wrap input:focus {
+  border-color:var(--accent); box-shadow:var(--glow);
+  background:var(--surface-hov);
+}
+.search-wrap input::placeholder { color:var(--muted); font-size:12.5px; }
+.search-wrap .si {
+  position:absolute; left:13px; top:50%; transform:translateY(-50%);
+  color:var(--muted); pointer-events:none; font-size:14px;
+}
 
-.wrap { max-width:960px; margin:28px auto; padding:0 24px; }
-h1 { font-size:27px; letter-spacing:-.02em; margin-bottom:6px;
-  background:linear-gradient(135deg,var(--accent),var(--accent-warm));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.sub { color:var(--muted); font-size:14px; margin-bottom:24px; }
+/* ===== Layout ===== */
+.wrap { max-width:1000px; margin:36px auto; padding:0 28px; }
 
-.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+h1 {
+  font-size:30px; font-weight:800; letter-spacing:-.03em; margin-bottom:8px;
+  background:linear-gradient(135deg,var(--accent) 0%, var(--accent-alt) 50%, var(--gold) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; line-height:1.3;
+}
+.sub { color:var(--muted); font-size:14px; margin-bottom:28px; letter-spacing:.01em; }
+
+/* ===== Hero / Logo section (overview only) ===== */
+.hero-logo {
+  text-align:center; padding:40px 0 20px; position:relative;
+}
+.hero-logo img {
+  max-width:200px; max-height:200px; border-radius:50%;
+  box-shadow:var(--glow-strong), 0 0 0 1px var(--border);
+  animation:float 6s ease-in-out infinite;
+  transition:box-shadow var(--transition), transform var(--transition);
+}
+.hero-logo img:hover { transform:scale(1.05); box-shadow:0 0 40px var(--accent-glow-strong), 0 0 80px rgba(0,229,255,.1); }
+@keyframes float {
+  0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)}
+}
+.hero-line {
+  width:80px; height:3px; margin:20px auto 0; border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--gold));
+  opacity:.7;
+}
+
+/* ===== Branch cards — glassmorphism style ===== */
+.grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:20px;
+}
 .card {
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  box-shadow:var(--shadow); padding:20px; display:block; color:inherit; text-decoration:none;
-  transition:transform .25s,box-shadow .25s,border-color .25s;
+  background:var(--surface); backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:24px; display:block; color:inherit; text-decoration:none;
+  transition:all .35s cubic-bezier(.4,0,.2,1);
   position:relative; overflow:hidden;
 }
+/* geometric accent corner */
 .card::before {
-  content:''; position:absolute; top:0;left:0;right:0;height:2.5px;
-  background:linear-gradient(90deg,var(--accent),var(--accent-warm)); opacity:0;
-  transition:opacity .25s;
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent 0%, var(--accent) 40%, var(--gold) 100%);
+  opacity:0; transition:opacity .35s;
 }
-.card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); border-color:var(--accent); }
+/* subtle inner glow on hover */
+.card::after {
+  content:''; position:absolute; inset:0; border-radius:var(--radius-lg);
+  pointer-events:none; opacity:0;
+  background:radial-gradient(circle at 50% 0%, var(--accent-glow), transparent 70%);
+  transition:opacity .35s;
+}
+.card:hover {
+  transform:translateY(-6px);
+  border-color:rgba(0,229,255,.3);
+  box-shadow:var(--glow-strong), inset 0 1px 0 rgba(255,255,255,.04);
+}
 .card:hover::before { opacity:1; }
-.card .c-icon { font-size:26px; margin-bottom:8px; display:block; }
-.card h3 { font-size:15.5px; color:var(--text); margin-bottom:6px; word-break:break-all;
-  transition:color .15s; }
-.card:hover h3 { color:var(--accent); }
-.card p { font-size:12.5px; color:var(--muted); margin:0; line-height:1.55; }
-.card .tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
-.card .tag-pill {
-  display:inline-block; font-size:11px; padding:2px 8px; border-radius:99px;
-  background:var(--accent-glow); color:var(--accent); border:1px solid transparent;
-  font-weight:500; letter-spacing:.02em;
+.card:hover::after { opacity:1; }
+.card h3 {
+  font-size:16px; font-weight:700; color:var(--text); margin-bottom:8px;
+  word-break:break-all; transition:color .2s;
 }
-html.light .card .tag-pill { background:rgba(37,99,235,.08); color:var(--accent); }
+.card:hover h3 { color:var(--accent); }
+.card p {
+  font-size:12.5px; color:var(--muted); margin:0; line-height:1.6;
+}
+.card .tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:12px; }
+.card .tag-pill {
+  display:inline-block; font-size:11px; padding:3px 10px; border-radius:99px;
+  background:var(--accent-glow); color:var(--accent);
+  border:1px solid rgba(0,229,255,.15);
+  font-weight:600; letter-spacing:.03em;
+  transition:all .2s;
+}
+.card .tag-pill:hover { background:var(--accent-glow-strong); border-color:var(--accent); }
+html.light .card .tag-pill { background:rgba(0,102,204,.08); color:var(--accent); border-color:rgba(0,102,204,.15); }
 
-table { width:100%; border-collapse:collapse; background:var(--surface);
+/* ===== Tables ===== */
+table {
+  width:100%; border-collapse:collapse; background:var(--surface);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
   border:1px solid var(--border); border-radius:var(--radius); overflow:hidden;
-  box-shadow:var(--shadow); }
-th,td { text-align:left; padding:10px 16px; border-bottom:1px solid var(--border-light); font-size:13.5px; }
-th { background:var(--bg-deep); color:var(--text-dim); font-weight:600;
-  text-transform:uppercase; font-size:11.5px; letter-spacing:.05em; }
+  box-shadow:var(--glow);
+}
+th, td {
+  text-align:left; padding:11px 18px;
+  border-bottom:1px solid var(--border-light); font-size:13.5px;
+}
+th {
+  background:rgba(0,0,0,.2); color:var(--text-dim); font-weight:700;
+  text-transform:uppercase; font-size:11px; letter-spacing:.06em;
+}
+html.light th { background:rgba(0,0,0,.03); }
 tr:last-child td { border-bottom:none; }
 tr:hover td { background:var(--surface-hov); }
-td a { color:var(--accent); text-decoration:none; word-break:break-all; transition:color .15s; }
-td a:hover { color:var(--accent-warm); text-decoration:underline; }
+td a { color:var(--accent); text-decoration:none; word-break:break-all;
+  transition:color .15s, text-shadow .15s; }
+td a:hover { color:var(--gold); text-shadow:0 0 8px var(--gold-glow); }
 .tag { display:inline-block; font-size:12px; color:var(--muted); }
-.dir { font-weight:600; color:var(--accent) !important; }
+.dir { font-weight:700; color:var(--accent) !important; }
 
+/* ===== Code blocks ===== */
 pre {
-  background:var(--bg-deep); color:#c9d1d9; padding:18px 20px; border-radius:var(--radius);
-  overflow-x:auto; font-size:13.2px; line-height:1.65;
+  background:var(--bg-deep); color:#e2e8f0; padding:20px 24px;
+  border-radius:var(--radius); overflow-x:auto;
+  font-size:13px; line-height:1.7;
   border:1px solid var(--border); position:relative;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
 }
 code { font-family:var(--font-mono); }
-p code,li code,td code {
-  background:var(--surface-hov); color:#f0a030; padding:2px 6px;
-  border-radius:4px; font-size:.88em; font-family:var(--font-mono);
+p code, li code, td code {
+  background:var(--surface-hov); color:var(--gold);
+  padding:2px 7px; border-radius:5px; font-size:.88em; font-family:var(--font-mono);
+  border:1px solid var(--border-light);
 }
-html.light p code,html.light li code,html.light td code { color:#cf4a00; }
+html.light p code, html.light li code, html.light td code { color:#b86c00; }
 
+/* ===== Markdown body ===== */
 .md-body {
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  box-shadow:var(--shadow); padding:26px 32px; margin-bottom:20px;
-  transition:background .3s,border-color .3s;
+  background:var(--surface); backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--border); border-radius:var(--radius-lg);
+  box-shadow:var(--glow); padding:28px 36px; margin-bottom:24px;
+  transition:all var(--transition);
 }
-.md-body h1,.md-body h2 { border-bottom:1px solid var(--border-light); padding-bottom:8px;
-  margin:22px 0 12px; }
-.md-body h1 { font-size:22px; } .md-body h2 { font-size:18.5px; }
-.md-body h3 { font-size:16px; margin:16px 0 8px; }
-.md-body img { max-width:100%; border-radius:var(--radius-sm); }
-.md-body ul,.md-body ol { padding-left:22px; margin:10px 0; }
-.md-body li { margin:4px 0; }
-.md-body blockquote { border-left:3px solid var(--accent); padding:10px 18px;
-  margin:14px 0; background:var(--accent-glow); border-radius:0 var(--radius-sm) var(--radius-sm) 0;
-  color:var(--text-dim); }
-.md-body table { margin:14px 0; }
-.md-body a { color:var(--accent); } .md-body a:hover { color:var(--accent-warm); }
+.md-body h1, .md-body h2 {
+  border-bottom:1px solid var(--border-light); padding-bottom:10px;
+  margin:24px 0 14px; font-weight:700;
+}
+.md-body h1 { font-size:23px; } .md-body h2 { font-size:19px; } .md-body h3 { font-size:16.5px; margin:18px 0 8px; }
+.md-body img { max-width:100%; border-radius:var(--radius-sm); box-shadow:var(--glow); }
+.md-body ul, .md-body ol { padding-left:24px; margin:12px 0; }
+.md-body li { margin:5px 0; }
+.md-body blockquote {
+  border-left:3px solid var(--accent); padding:12px 20px; margin:16px 0;
+  background:var(--accent-glow); border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  color:var(--text-dim); font-style:italic;
+}
+.md-body table { margin:16px 0; }
+.md-body a { color:var(--accent); transition:color .15s; }
+.md-body a:hover { color:var(--gold); }
 
+/* ===== File header ===== */
 .filehead {
   background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  box-shadow:var(--shadow); padding:12px 20px; margin-bottom:16px; font-size:13px;
-  color:var(--muted); display:flex; gap:14px; flex-wrap:wrap; align-items:center;
+  box-shadow:var(--glow); padding:14px 22px; margin-bottom:18px; font-size:13px;
+  color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; align-items:center;
 }
 .filehead b { color:var(--text); }
 .filehead a { color:var(--accent); text-decoration:none; transition:color .15s; }
-.filehead a:hover { color:var(--accent-warm); }
+.filehead a:hover { color:var(--gold); }
 
-.note { color:var(--muted); font-size:13px; margin-top:16px; }
-.footer { text-align:center; color:var(--muted); font-size:12px; margin-top:44px;
-  padding-top:20px; border-top:1px solid var(--border-light); }
-.no-results { text-align:center; color:var(--muted); padding:32px 0; font-size:14px; }
+/* ===== Footer ===== */
+.note { color:var(--muted); font-size:13px; margin-top:18px; }
+.footer {
+  text-align:center; color:var(--muted); font-size:12px; margin-top:52px;
+  padding-top:24px; border-top:1px solid var(--border-light);
+  letter-spacing:.02em;
+}
+.no-results { text-align:center; color:var(--muted); padding:40px 0; font-size:14px; }
 
-@media(max-width:720px) {
-  .topbar { padding:8px 14px; gap:10px; flex-wrap:wrap; }
-  .wrap { padding:0 16px; margin:20px auto; }
-  .grid { grid-template-columns:1fr; }
-  h1 { font-size:22px; }
+/* ===== Responsive ===== */
+@media(max-width:768px) {
+  .topbar { padding:0 16px; height:50px; gap:12px; flex-wrap:wrap; }
+  .wrap { padding:0 18px; margin:24px auto; }
+  .grid { grid-template-columns:1fr; gap:14px; }
+  h1 { font-size:24px; }
+  .hero-logo img { max-width:140px; max-height:140px; }
   .search-wrap { max-width:100%; }
+  .card { padding:18px; }
 }
 """
 
-HLJS = ('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">\n'
+HLJS = ('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">\n'
         '<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>\n'
         '<script>document.addEventListener("DOMContentLoaded",function(){try{hljs.highlightAll()}catch(e){}})</script>')
 
@@ -256,19 +380,19 @@ def branch_meta(name: str) -> tuple:
     icon = "U0001f3e0"  # 🏠 默认
     tags = []
     if any(k in n for k in ("main", "master", "trunk")):
-        icon = "U0001f3e0"; tags.append("主分支")
+        icon = "🏠"; tags.append("主分支")
     elif any(k in n for k in ("dev", "develop", "development")):
-        icon = "U0001f527"; tags.append("开发")
+        icon = "🔧"; tags.append("开发")
     elif "feature" in n or "feat" in n:
         icon = "✨"; tags.append("功能")
     elif any(k in n for k in ("fix", "bug", "hotfix", "patch")):
-        icon = "U0001f6a7"; tags.append("修复")
+        icon = "🚧"; tags.append("修复")
     elif "release" in n or "rc" in n or "v" in n:
-        icon = "U0001f389"; tags.append("发布")
+        icon = "🎉"; tags.append("发布")
     elif "doc" in n or "wiki" in n:
-        icon = "U0001f4d6"; tags.append("文档")
+        icon = "📖"; tags.append("文档")
     elif "test" in n or "ci" in n:
-        icon = "U0001f680"; tags.append("测试")
+        icon = "🚀"; tags.append("测试")
     if "osr" in n: tags.append("OSR")
     if "bffls" in n: tags.append("BFFLS")
     return icon, tags
@@ -280,19 +404,19 @@ def branch_meta(name: str) -> tuple:
     icon = "U0001f3e0"  # 🏠 默认
     tags = []
     if any(k in n for k in ("main", "master", "trunk")):
-        icon = "U0001f3e0"; tags.append("主分支")
+        icon = "🏠"; tags.append("主分支")
     elif any(k in n for k in ("dev", "develop", "development")):
-        icon = "U0001f527"; tags.append("开发")
+        icon = "🔧"; tags.append("开发")
     elif "feature" in n or "feat" in n:
         icon = "✨"; tags.append("功能")
     elif any(k in n for k in ("fix", "bug", "hotfix", "patch")):
-        icon = "U0001f6a7"; tags.append("修复")
+        icon = "🚧"; tags.append("修复")
     elif "release" in n or "rc" in n or "v" in n:
-        icon = "U0001f389"; tags.append("发布")
+        icon = "🎉"; tags.append("发布")
     elif "doc" in n or "wiki" in n:
-        icon = "U0001f4d6"; tags.append("文档")
+        icon = "📖"; tags.append("文档")
     elif "test" in n or "ci" in n:
-        icon = "U0001f680"; tags.append("测试")
+        icon = "🚀"; tags.append("测试")
     # 根据名称中的关键词追加额外标签
     if "osr" in n: tags.append("OSR")
     if "bffls" in n: tags.append("BFFLS")
@@ -438,21 +562,22 @@ def listing_page(branch: str, dir_rel: str, entries: list, readme_html: str,
                     search_id="file-search")
 
 
-def overview_page(title: str, repo_url: str, infos: list) -> str:
+def overview_page(title: str, repo_url: str, infos: list, logo_html: str = "") -> str:
     cards = []
     for it in infos:
-        icon, tags = branch_meta(it["name"])
+        _, tags = branch_meta(it["name"])
         tag_html = ""
         if tags:
             tag_html = '<div class="tags">' + "".join(
                 '<span class="tag-pill">%s</span>' % ES(t) for t in tags) + '</div>'
         extra = " · 自带首页" if it["has_index"] else ""
-        cards.append('<a class="card" href="%s"><span class="c-icon">%s</span><h3>%s</h3>'
+        cards.append('<a class="card" href="%s"><h3>%s</h3>'
                      '<p>📅 %s · 📄 %d 个文件%s</p>%s</a>'
-                     % (ES(it["href"]), icon, ES(it["name"]),
+                     % (ES(it["href"]), ES(it["name"]),
                         ES(it["date"] or "—"), it["files"], extra, tag_html))
     gh_link = '<a class="gh" href="%s">GitHub 仓库</a>' % ES(repo_url) if repo_url else ""
-    body = ('<h1>%s</h1><p class="sub">全部分支一览 · 共 %d 个分支 · 生成于 %s (UTC)</p>'
+    body = (logo_html +
+            '<h1>%s</h1><p class="sub">全部分支一览 · 共 %d 个分支 · 生成于 %s (UTC)</p>'
             '<div class="grid">%s</div>'
             '<p class="footer">本站由 GitHub Actions 自动构建：分支更新后自动重建。%s</p>'
             % (ES(title), len(infos), datetime.utcnow().strftime("%Y-%m-%d %H:%M"),
@@ -668,7 +793,19 @@ def main():
                           "date": branch_date(repo, ref), "files": stat["pages"],
                           "has_index": stat["has_root_index"]})
 
-    _write(out / "index.html", overview_page(a.title, a.repo_url, infos))
+    # 检测 Logo 图片
+    logo_html = ""
+    for lf in ("logo.png","logo.jpg","logo.jpeg","logo.svg","logo.webp"):
+        lp = repo / lf
+        if lp.exists() and lp.stat().st_size < 2*1024*1024:
+            import shutil as _shutil
+            _shutil.copy2(lp, out / lf)
+            logo_html = ('<div class="hero-logo">'
+                       '<img src="%s" alt="Logo" loading="lazy"></div>'
+                       '<div class="hero-line"></div>' % ES(lf))
+            break
+
+    _write(out / "index.html", overview_page(a.title, a.repo_url, infos, logo_html))
     print("完成: %s (共 %d 个分支)" % (out, len(infos)))
 
 
