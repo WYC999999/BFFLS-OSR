@@ -1,29 +1,42 @@
-
-<img width="170" height="170" alt="北京市丰台区外国语学校校徽" src="https://github.com/user-attachments/assets/721a8d88-4492-4de5-91a4-1a7e2050e714" />   <img width="160" height="160" alt="1769236899567" src="https://github.com/user-attachments/assets/13e4cc67-ea32-40d4-8d30-baddc5aaf90e" />
-
-![1769595293558](https://github.com/user-attachments/assets/4effe8a6-e8a0-4379-9990-ea837e5f8f13)
 ![x com_1362758201](https://github.com/user-attachments/assets/601ed080-b8df-40b4-894d-9f491bca2bbe)
 
-
+![Field](https://img.shields.io/badge/BFFLS-blue) ![Version](https://img.shields.io/badge/version-0.0.8-green) ![Last Commit](https://img.shields.io/github/last-commit/WYC999999/BFFLS-OSR) ![Repo Size](https://img.shields.io/github/repo-size/WYC999999/BFFLS-OSR) ![Stars](https://img.shields.io/github/stars/WYC999999/BFFLS-OSR?style=social) ![Forks](https://img.shields.io/github/forks/WYC999999/BFFLS-OSR?style=social)
 # 🏫 北京市丰台区外国语学校开源项目仓库  
 **Beijing Fengtai Foreign Language School Open Source Repository (BFFLS-OSR)**
 
 ---
 
-> **开放 · 合作 · 创新 · 共育**
+> **爱国 · 求知**
+
+> **“千万不要忘记数形结合。”  —— 任雅雅**
+>
+> **“调整好学习习惯、行为习惯。”  —— 程树利**
 
 > [!CAUTION]
 > **★ 最高指示 ★**   
 > 
 > 本仓库**一切活动必须置于中国共产主义青年团的坚强领导之下**。  
-> 任何企图摆脱、削弱、反对共青团领导的言行，任何违反团的纪律、损害团组织权威的行为，**均被视为严重政治问题**。
+> 任何企图摆脱、削弱、反对团领导的言行，任何违反团的纪律、损害团组织权威的行为，**均被视为严重政治问题**。
 > 
-> 全体团员必须坚决维护共青团的集中统一领导，**永葆共青团的政治性、先进性、群众性**。
+> 全体团员必须坚决维护团的集中统一领导，**永葆团的政治性、先进性、群众性**。
 > 
 > 任何人参与、浏览、贡献、评论本仓库，即视为已阅读、理解并完全接受以上全部要求，**违者后果自负**。
 >
 >**北京市丰台区外国语学校共青团委员会**  
->二〇二六年三月  
+>二〇二六年三月
+
+> [!CAUTION]
+> **★ 最高指示 ★**
+>
+> 本仓库**一切活动必须置于中国共产党的坚强领导之下**。  
+> 任何企图摆脱、削弱、反对党领导的言行，任何违反党的纪律、损害党组织权威的行为，**均被视为严重政治问题**。
+>
+> 全体党员必须坚决维护党的集中统一领导，**永葆党的政治性、先进性、纯洁性**。
+>
+> 任何人参与、浏览、贡献、评论本仓库，即视为已阅读、理解并完全接受以上全部要求，**违者后果自负**。
+>
+>**北京市丰台区外国语学校共青团委员会**  
+>二〇二六年四月
 ---
 
 ## 📖 目录
@@ -96,7 +109,7 @@
 
 ## 📫 六、联系方式
   
-- **项目负责人**：[@WYC999999](https://github.com/WYC999999)
+- **项目负责人**：[@WYC999999](https://github.com/WYC999999) [@RICK-ALSTEY](https://github.com/RICK-ALSTEY) [@Flanker-Tarkov](https://github.com/Flanker-Tarkov)
 
 ---
 
